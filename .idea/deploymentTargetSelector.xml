@@ -7,10 +7,10 @@
       </SelectionState>
       <SelectionState runConfigName="Watchly">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-02-15T22:39:05.146500700Z">
+        <DropdownSelection timestamp="2025-02-17T17:18:05.025722700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\maria\.android\avd\Medium_Phone.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZCWA0KLW8H" />
             </handle>
           </Target>
         </DropdownSelection>

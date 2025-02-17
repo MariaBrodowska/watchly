@@ -7,33 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.List;
-
 import android.widget.BaseAdapter;
 
 public class MovieAdapter extends BaseAdapter {
     private Context context;
     private List<Movie> movies;
-
-
     public MovieAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
     }
-
     @Override
     public int getCount() {
         return movies.size();
     }
-
     @Override
     public Movie getItem(int position) {
         return movies.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -48,13 +40,13 @@ public class MovieAdapter extends BaseAdapter {
 //            backView.setVisibility(View.INVISIBLE);
 //            frontView.setVisibility(View.VISIBLE);
 //        }
-        convertView.animate().rotationY(90f).setDuration(300).withEndAction(new Runnable() {
+        convertView.animate().rotationY(80f).setDuration(300).withEndAction(new Runnable() {
             @Override
             public void run() {
+                convertView.setRotationY(-100f);
                 frontView.setVisibility(View.INVISIBLE);
                 backView.setVisibility(View.VISIBLE);
-                convertView.setRotationY(-90f);
-                convertView.animate().rotationY(0f).setDuration(300).start();
+                convertView.animate().rotationY(0f).setDuration(1000).start();
             }
         }).start();
     }
