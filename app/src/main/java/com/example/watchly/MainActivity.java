@@ -2,16 +2,14 @@ package com.example.watchly;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Adapter;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         movieAdapter = new MovieAdapter(this, movies);
         swipeView.setAdapter(movieAdapter);
-
         swipeView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
@@ -58,8 +55,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onScroll(float scrollProgressPercent) {}
         });
-
         loadMoreMovies(); //pierwsza strona
+        swipeView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClicked(int item, Object object) {
+//                Log.d("MovieAdapter", "KLIKNIETO W MAIN!");
+                Movie movie = movieAdapter.getItem(item);
+                View convertView = swipeView.getSelectedView(); //widok zaznaczonej karty
+                View frontView = convertView.findViewById(R.id.frontLayout);
+                View backView = convertView.findViewById(R.id.backLayout);
+                if(!movie.isFlipped()) {
+                    movieAdapter.flipCard(convertView, frontView, backView);
+                }
+                else{
+                    movieAdapter.flipCard(convertView, backView, frontView);
+                }
+                movie.setFlipped(!movie.isFlipped());
+            }
+        });
     }
 
     private void loadMoreMovies() {

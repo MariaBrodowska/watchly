@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="#000000"
-        android:contentDescription="Background Image"
         android:scaleType="centerCrop"
         android:src="@drawable/main_background" />
 
@@ -33,16 +32,15 @@
 
     <ImageView
         android:id="@+id/bar"
-        android:layout_width="413dp"
-        android:layout_height="78dp"
-        android:contentDescription="Bar"
+        android:layout_width="417dp"
+        android:layout_height="81dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bar" />
 
     <LinearLayout
-        android:layout_width="418dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:foregroundGravity="center_vertical"
         android:orientation="horizontal"
@@ -55,29 +53,33 @@
 
         <ImageView
             android:id="@+id/watched"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
             app:srcCompat="@drawable/seen" />
 
         <ImageView
             android:id="@+id/discover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
             app:srcCompat="@drawable/discover" />
 
         <ImageView
             android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
             app:srcCompat="@drawable/search" />
 
         <ImageView
             android:id="@+id/toWatch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
             app:srcCompat="@drawable/to_watch" />
 
@@ -87,9 +89,9 @@
         android:id="@+id/current"
         android:layout_width="70dp"
         android:layout_height="49dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintHorizontal_bias="0.351"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bar"
         app:srcCompat="@drawable/current" />

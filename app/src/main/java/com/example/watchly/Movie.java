@@ -18,6 +18,7 @@ public class Movie {
     private double vote_average;
     private int vote_count;
 
+    private boolean isFlipped = false;
     public boolean isAdult() {
         return adult;
     }
@@ -146,5 +147,13 @@ public class Movie {
                 "Video: " + isVideo() + "\n" +
                 "Vote Average: " + getVote_average() + "\n" +
                 "Vote Count: " + getVote_count();
+    }
+
+    public boolean isFlipped() {
+        return isFlipped;
+    }
+
+    public void setFlipped(boolean flipped) {
+        isFlipped = flipped;
     }
 }
