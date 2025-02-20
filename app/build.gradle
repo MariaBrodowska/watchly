@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id 'com.google.gms.google-services'
 }
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
@@ -37,13 +38,22 @@ android {
 }
 
 dependencies {
-    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
-    implementation 'com.lorentzos.swipecards:library:1.0.9'
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation('com.squareup.retrofit2:converter-gson:2.11.0')
+    implementation('com.squareup.retrofit2:retrofit:2.11.0')
+    implementation('com.lorentzos.swipecards:library:1.0.9')
+    implementation('com.github.bumptech.glide:glide:4.13.0')
     implementation libs.core.animation
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
+    annotationProcessor('com.github.bumptech.glide:compiler:4.13.0')
+    implementation('androidx.cardview:cardview:1.0.0')
+
+    implementation(libs.play.services.auth)
+    implementation(libs.google.firebase.auth)
+    implementation(platform(libs.firebase.bom))
+//    implementation(libs.credentials)
+//    implementation(libs.credentials.play.services.auth)
+//    implementation(libs.googleid)
+//    implementation 'com.google.android.gms:play-services-identity:20.0.1'
+
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity

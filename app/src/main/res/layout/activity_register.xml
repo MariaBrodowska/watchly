@@ -19,10 +19,10 @@
         android:src="@drawable/background_login_bottom" />
 
     <TextView
-        android:id="@+id/signin"
+        android:id="@+id/signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="240dp"
         android:fontFamily="@font/josefin_sans"
         android:gravity="center"
         android:text="Create Account"
@@ -34,7 +34,7 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/signin"
+        android:layout_below="@id/signup"
         android:layout_marginTop="30dp"
         android:layout_marginHorizontal="20dp"
         android:hint="Name*"
@@ -48,7 +48,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        android:layout_marginTop="5dp"
         android:layout_marginHorizontal="20dp"
         android:hint="Email*"
         android:paddingHorizontal="10dp"
@@ -62,12 +61,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/email"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="5dp"
         android:hint="Password*"
         android:paddingHorizontal="10dp"
         android:paddingVertical="30dp"
         android:textColor="@color/black"
-        android:textColorHint="#5A5A5A" />
+        android:textColorHint="#5A5A5A"
+        android:inputType="textPassword"/>
 
     <TextView
         android:id="@+id/buttonLogin"
@@ -96,7 +95,7 @@
         android:fontFamily="@font/josefin_sans"
         android:text="Or register using social media"
         android:textColor="@color/black"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:textSize="16sp"
         android:textStyle="normal" />
 
@@ -108,16 +107,19 @@
         android:gravity="center"
         android:layout_marginTop="20dp">
         <ImageView
+            android:id="@+id/fb"
             android:layout_width="55px"
             android:layout_height="55px"
             android:layout_marginHorizontal="8dp"
             android:src="@drawable/fb"/>
         <ImageView
+            android:id="@+id/google"
             android:layout_width="55px"
             android:layout_height="55px"
             android:layout_marginHorizontal="10dp"
             android:src="@drawable/google"/>
         <ImageView
+            android:id="@+id/twitter"
             android:layout_width="55px"
             android:layout_height="55px"
             android:layout_marginHorizontal="13dp"
@@ -127,9 +129,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_below="@id/socialIcons"
         android:gravity="center"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -143,6 +148,7 @@
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

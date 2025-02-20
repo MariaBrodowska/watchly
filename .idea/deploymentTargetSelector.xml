@@ -7,7 +7,7 @@
       </SelectionState>
       <SelectionState runConfigName="Watchly">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-02-17T17:18:05.025722700Z">
+        <DropdownSelection timestamp="2025-02-20T23:26:01.693202700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=RZCWA0KLW8H" />
