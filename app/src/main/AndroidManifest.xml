@@ -25,6 +25,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".SeenActivity" />
+        <activity android:name=".WatchlistActivity" />
+        <activity android:name=".SearchActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
