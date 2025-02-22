@@ -18,6 +18,22 @@
         android:layout_marginBottom="0dp"
         android:src="@drawable/background_login_bottom" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileImage"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:id="@+id/nameTV"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mailTV"
+        />
     <TextView
         android:id="@+id/signup"
         android:layout_width="match_parent"

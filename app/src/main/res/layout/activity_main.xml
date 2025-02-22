@@ -14,7 +14,9 @@
         android:layout_height="match_parent"
         android:backgroundTint="#000000"
         android:scaleType="centerCrop"
-        android:src="@drawable/main_background" />
+        android:src="@drawable/main_background"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/swipeView"
@@ -25,8 +27,14 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent">
-
     </com.lorentzos.flingswipe.SwipeFlingAdapterView>
+
+    <View
+        android:id="@+id/blockerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/buttonBar"
@@ -160,6 +168,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swipeView"
         app:srcCompat="@drawable/current" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:gravity="end">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="5dp"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:textColor="#FF9800"/>
+        <ImageView
+            android:id="@+id/logout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.956"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/backgroundImage"
+            app:srcCompat="@drawable/logout" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/page"

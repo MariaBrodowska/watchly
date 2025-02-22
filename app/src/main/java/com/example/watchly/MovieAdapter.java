@@ -40,13 +40,19 @@ public class MovieAdapter extends BaseAdapter {
 //            backView.setVisibility(View.INVISIBLE);
 //            frontView.setVisibility(View.VISIBLE);
 //        }
+        convertView.setEnabled(false);
         convertView.animate().rotationY(80f).setDuration(300).withEndAction(new Runnable() {
             @Override
             public void run() {
                 convertView.setRotationY(-100f);
                 frontView.setVisibility(View.INVISIBLE);
                 backView.setVisibility(View.VISIBLE);
-                convertView.animate().rotationY(0f).setDuration(1000).start();
+                convertView.animate().rotationY(0f).setDuration(800).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        convertView.setEnabled(true);
+                    }
+                }).start();
             }
         }).start();
     }

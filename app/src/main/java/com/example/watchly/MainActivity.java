@@ -1,5 +1,6 @@
 package com.example.watchly;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,10 @@ import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private int currentPage = new Random().nextInt(MAX_PAGES) + 1;
     private boolean isLoading = false;
     private List<Movie> returnMovies;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private void animateButton(View v) {
         ScaleAnimation scaleDown = new ScaleAnimation(
@@ -91,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView name = findViewById(R.id.name);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String userName = currentUser.getDisplayName();
+            name.setText(userName);
+        } else {
+            name.setText("Guest");
+        }
+
         SwipeFlingAdapterView swipeView = findViewById(R.id.swipeView);
         movies = new ArrayList<>();
         returnMovies = new ArrayList<>();
@@ -123,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onScroll(float scrollProgressPercent) {}
+        });
+        findViewById(R.id.logout).setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), StartActivity.class));
+            finish();
         });
         findViewById(R.id.buttonSkip).setOnClickListener(v -> {
             animateButton(v);
