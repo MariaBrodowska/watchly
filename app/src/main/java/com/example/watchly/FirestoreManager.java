@@ -57,6 +57,18 @@ public class FirestoreManager {
         }
     }
 
+    public void deleteFromWatchlist(int movieId){
+        if (currentUser != null) {
+            db.collection("users")
+                    .document(currentUser.getUid())
+                    .collection("watchlist")
+                    .document(String.valueOf(movieId))
+                    .delete()
+                    .addOnSuccessListener(aVoid -> Log.d("FIRESTORE", "Film usuniety z listy do obejrzenia!"))
+                    .addOnFailureListener(e -> Log.e("FIRESTORE", "Blad usuwania filmu z Firestore", e));
+        }
+    }
+
     public void addToWatched(Movie movie) {
         if (currentUser != null) {
             Map<String, Object> movieData = getMovieData(movie);
@@ -67,6 +79,18 @@ public class FirestoreManager {
                     .set(movieData)
                     .addOnSuccessListener(aVoid -> Log.d("FIRESTORE", "Film dodany do obejrzanych!"))
                     .addOnFailureListener(e -> Log.e("FIRESTORE", "Błąd zapisu do Firestore", e));
+        }
+    }
+
+    public void deleteFromWatched(int movieId) {
+        if (currentUser != null) {
+            db.collection("users")
+                    .document(currentUser.getUid())
+                    .collection("watched")
+                    .document(String.valueOf(movieId))
+                    .delete()
+                    .addOnSuccessListener(aVoid -> Log.d("FIRESTORE", "Film usuniety z listy obejrzanych!"))
+                    .addOnFailureListener(e -> Log.e("FIRESTORE", "Blad usuwania filmu z Firestore", e));
         }
     }
 
@@ -118,7 +142,7 @@ public class FirestoreManager {
                                     Movie movie = document.toObject(Movie.class);
                                     movies.add(movie);
                                 }
-                                Log.d("FIRESTORE", "DO OBEJRZENIA: " + movies.size());
+//                                Log.d("FIRESTORE", "DO OBEJRZENIA: " + movies.size());
                                 toWatchMovies = movies;
                                 listener.onMoviesLoaded(movies);
                             }
