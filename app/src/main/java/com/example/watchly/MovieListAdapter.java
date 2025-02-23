@@ -1,6 +1,8 @@
 package com.example.watchly;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,14 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500" + movie.getPoster_path())
                 .into(holder.moviePoster);
+
+        holder.itemView.setOnClickListener(v -> {
+            Log.d("MOVIE GENRES!!!!", movie.getAll());
+            Intent intent = new Intent(context, MovieDetailActivity.class);
+            intent.putExtra("movie", movie);  // Przesyłanie całego obiektu
+            intent.putExtra("pageType", pageType);
+            context.startActivity(intent);
+        });
 
         if(pageType.equals("seen")) {
             holder.delete.setText("Delete from Seen");

@@ -93,7 +93,6 @@ public class GoogleSignInManager {
                     }
                 })
                 .addOnFailureListener(e -> {
-//                    Log.e("Firestore", "Error saving user data", e);
                     Toast.makeText(context, "Error saving user data", Toast.LENGTH_SHORT).show();
                 });
     }

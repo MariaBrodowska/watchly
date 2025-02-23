@@ -101,7 +101,7 @@ public class MovieAdapter extends BaseAdapter {
         setStars(movie.getVote_average(), stars);
 
         description.setText(movie.getOverview());
-
+        Log.d("GATUNKI", "DIZALA: " + movie.getGenre_ids());
         String posterPath = movie.getPoster_path();
         String secondPath = movie.getBackdrop_path();
 

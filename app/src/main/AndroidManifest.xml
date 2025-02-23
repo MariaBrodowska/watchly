@@ -28,6 +28,7 @@
         <activity android:name=".SeenActivity" />
         <activity android:name=".WatchlistActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".MovieDetailActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
