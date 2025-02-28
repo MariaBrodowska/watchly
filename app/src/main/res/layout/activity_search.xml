@@ -2,212 +2,209 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    tools:context=".WatchlistActivity">
+    tools:context=".SearchListActivity">
 
     <ImageView
-        android:id="@+id/backgroundImage"
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="#000000"
-        android:scaleType="centerCrop"
-        android:src="@drawable/main_background"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:background="#70FFFFFF"
+        android:scaleType="fitXY"
+        android:src="@drawable/search_background" />
 
-    <ImageView
-        android:id="@+id/bar"
-        android:layout_width="417dp"
-        android:layout_height="81dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bar" />
-
-    <LinearLayout
-        android:id="@+id/icons"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:foregroundGravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/backgroundImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImage"
-        app:layout_constraintVertical_bias="0.97">
-
-        <ImageView
-            android:id="@+id/watched"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/seen" />
-
-        <ImageView
-            android:id="@+id/discover"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/discover" />
-
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/search" />
-
-        <ImageView
-            android:id="@+id/toWatch"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/to_watch" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/current"
-        android:layout_width="70dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="-15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/current" />
-
-
-    <LinearLayout
-        android:id="@+id/user"
+    <View
+        android:id="@+id/backgroundBlur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:gravity="end"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="5dp">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="5dp"
-            android:textColor="#FF9800"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-
-        <ImageView
-            android:id="@+id/logout"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.956"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/backgroundImage"
-            app:srcCompat="@drawable/logout" />
-    </LinearLayout>
+        android:background="#70FFFFFF" />
 
     <TextView
-        android:id="@+id/page"
-        android:layout_width="wrap_content"
+        android:id="@+id/pageTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:fontFamily="@font/josefin_sans"
-        android:text="Search"
-        android:textColor="#E7E3E3"
-        android:textSize="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        android:paddingStart="30dp"
+        android:paddingTop="30dp"
+        android:paddingEnd="130dp"
+        android:paddingBottom="5dp"
+        android:text="@string/find_next_movie_to_watch"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/iconText"
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="2dp"
+        android:background="#565656"
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <RadioGroup
+        android:id="@+id/types"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:foregroundGravity="center_vertical"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        android:layout_marginTop="20dp"
+        tools:layout_editor_absoluteX="16dp">
+
+        <RadioButton
+            android:id="@+id/allTypesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/search_movie_checked"
+            android:button="@drawable/search_radio_button"
+            android:checked="true"
+            android:text="@string/all"
+            android:paddingHorizontal="5dp" />
+
+        <RadioButton
+            android:id="@+id/movieButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/search_movie_unchecked"
+            android:button="@drawable/search_radio_button"
+            android:checked="false"
+            android:paddingHorizontal="10dp"
+            android:text="@string/movie" />
+
+        <RadioButton
+            android:id="@+id/seriesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/search_movie_unchecked"
+            android:button="@drawable/search_radio_button"
+            android:checked="false"
+            android:paddingHorizontal="10dp"
+            android:text="@string/series" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/genreText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/josefin_sans"
+        android:text="@string/genres_scroll_to_see_more"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/types" />
+
+    <ImageView
+        android:id="@+id/genreBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleX="1.1"
+        android:src="@drawable/search_background_field"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textSeen"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Seen"
-            android:textAlignment="center"
-            android:textColor="#E7E3E3"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textDiscover"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textDiscover"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Discover"
-            android:textAlignment="center"
-            android:textColor="#E7E3E3"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textSearch"
-            app:layout_constraintHorizontal_bias="0.14" />
-
-        <TextView
-            android:id="@+id/textSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Search"
-            android:textAlignment="center"
-            android:textColor="#E7E3E3"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textWatchlist" />
-
-        <TextView
-            android:id="@+id/textWatchlist"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Watchlist"
-            android:textAlignment="center"
-            android:textColor="#E7E3E3"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genreText" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/genreRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="10dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/iconText"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/genreBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/page" />
+        app:layout_constraintTop_toBottomOf="@+id/genreText"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:layout_marginHorizontal="2dp"
+        app:spanCount="3"/>
+
+    <TextView
+        android:id="@+id/languageText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:text="@string/original_language"
+        android:fontFamily="@font/josefin_sans"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/genreBackground" />
+
+    <ImageView
+        android:id="@+id/languageBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleX="1.1"
+        android:src="@drawable/search_background_field"
+        app:layout_constraintTop_toBottomOf="@+id/languageText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/languageRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="2dp"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@+id/languageBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/languageText"
+        app:spanCount="2" />
+
+    <TextView
+        android:id="@+id/sortText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/josefin_sans"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:text="@string/sort_by"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/languageBackground" />
+
+    <ImageView
+        android:id="@+id/sortBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleX="1.1"
+        android:scaleY="0.6"
+        android:layout_marginTop="-30dp"
+        android:src="@drawable/search_background_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sortText" />
+
+    <ImageView
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search_button"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/sortBackground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_movies"
+        android:textColor="@color/white"
+        android:fontFamily="@font/josefin_sans"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/searchButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

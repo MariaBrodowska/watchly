@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Watchly"
         tools:targetApi="31">
         <activity
-            android:name=".StartActivity"
+            android:name=".SearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SeenActivity" />
         <activity android:name=".WatchlistActivity" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".StartActivity" />
         <activity android:name=".MovieDetailActivity" />
         <meta-data
             android:name="preloaded_fonts"

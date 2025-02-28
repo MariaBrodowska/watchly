@@ -39,7 +39,7 @@ public class WatchlistActivity extends AppCompatActivity {
 
         pages.setMenuIntent(findViewById(R.id.textSeen), findViewById(R.id.watched), SeenActivity.class);
         pages.setMenuIntent(findViewById(R.id.textDiscover), findViewById(R.id.discover), MainActivity.class);
-        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchActivity.class);
+        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchListActivity.class);
         pages.setMenuIntent(findViewById(R.id.textWatchlist), findViewById(R.id.toWatch), WatchlistActivity.class);
         pages.setLogout(findViewById(R.id.logout));
         pages.setName(findViewById(R.id.name));
@@ -50,15 +50,12 @@ public class WatchlistActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         fm = new FirestoreManager();
 
-        fm.getWatchlist(new FirestoreManager.OnMoviesLoadedListener() {
-            @Override
-            public void onMoviesLoaded(List<Movie> movies) {
-                toWatchMovies.clear();
-                toWatchMovies.addAll(movies);
-                Log.d("DO OBEJRZENIA WATCHLIST", "DO OBEJRZENIA: " + toWatchMovies.size());
-                adapter = new MovieListAdapter(WatchlistActivity.this, toWatchMovies, "watchlist");
-                recyclerView.setAdapter(adapter);
-            }
+        fm.getWatchlist(movies -> {
+            toWatchMovies.clear();
+            toWatchMovies.addAll(movies);
+            Log.d("DO OBEJRZENIA WATCHLIST", "DO OBEJRZENIA: " + toWatchMovies.size());
+            adapter = new MovieListAdapter(WatchlistActivity.this, toWatchMovies, "watchlist");
+            recyclerView.setAdapter(adapter);
         });
     }
 }

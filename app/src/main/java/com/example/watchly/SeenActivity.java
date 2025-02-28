@@ -2,7 +2,6 @@ package com.example.watchly;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +38,7 @@ public class SeenActivity extends AppCompatActivity{
 
         pages.setMenuIntent(findViewById(R.id.textSeen), findViewById(R.id.watched), SeenActivity.class);
         pages.setMenuIntent(findViewById(R.id.textDiscover), findViewById(R.id.discover), MainActivity.class);
-        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchActivity.class);
+        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchListActivity.class);
         pages.setMenuIntent(findViewById(R.id.textWatchlist), findViewById(R.id.toWatch), WatchlistActivity.class);
         pages.setLogout(findViewById(R.id.logout));
         pages.setName(findViewById(R.id.name));
@@ -50,15 +49,12 @@ public class SeenActivity extends AppCompatActivity{
         db = FirebaseFirestore.getInstance();
         fm = new FirestoreManager();
 
-        fm.getWatched(new FirestoreManager.OnMoviesLoadedListener() {
-            @Override
-            public void onMoviesLoaded(List<Movie> movies) {
-                seenMovies.clear();
-                seenMovies.addAll(movies); //resetujemy
+        fm.getWatched(movies -> {
+            seenMovies.clear();
+            seenMovies.addAll(movies); //resetujemy
 //                Log.d("OBEJRZANE SEEN", "OBEJRZANE: " + seenMovies.size());
-                adapter = new MovieListAdapter(SeenActivity.this, seenMovies, "seen");
-                recyclerView.setAdapter(adapter);
-            }
+            adapter = new MovieListAdapter(SeenActivity.this, seenMovies, "seen");
+            recyclerView.setAdapter(adapter);
         });
     }
 }

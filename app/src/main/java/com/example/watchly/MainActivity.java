@@ -1,17 +1,9 @@
 package com.example.watchly;
-import android.animation.ObjectAnimator;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.util.ArrayList;
@@ -92,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         pages.setMenuIntent(findViewById(R.id.textSeen), findViewById(R.id.watched), SeenActivity.class);
         pages.setMenuIntent(findViewById(R.id.textDiscover), findViewById(R.id.discover), MainActivity.class);
-        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchActivity.class);
+        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchListActivity.class);
         pages.setMenuIntent(findViewById(R.id.textWatchlist), findViewById(R.id.toWatch), WatchlistActivity.class);
         pages.setLogout(findViewById(R.id.logout));
         pages.setName(findViewById(R.id.name));
@@ -111,22 +103,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         loadMoreMovies(); //pierwsza strona
-        swipeView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClicked(int item, Object object) {
+        swipeView.setOnItemClickListener((item, object) -> {
 //                Log.d("MovieAdapter", "KLIKNIETO W MAIN!");
-                Movie movie = movieAdapter.getItem(item);
-                View convertView = swipeView.getSelectedView(); //widok zaznaczonej karty
-                View frontView = convertView.findViewById(R.id.frontLayout);
-                View backView = convertView.findViewById(R.id.backLayout);
-                if(!movie.isFlipped()) {
-                    movieAdapter.flipCard(convertView, frontView, backView);
-                }
-                else{
-                    movieAdapter.flipCard(convertView, backView, frontView);
-                }
-                movie.setFlipped(!movie.isFlipped());
+            Movie movie = movieAdapter.getItem(item);
+            View convertView = swipeView.getSelectedView(); //widok zaznaczonej karty
+            View frontView = convertView.findViewById(R.id.frontLayout);
+            View backView = convertView.findViewById(R.id.backLayout);
+            if(!movie.isFlipped()) {
+                movieAdapter.flipCard(convertView, frontView, backView);
             }
+            else{
+                movieAdapter.flipCard(convertView, backView, frontView);
+            }
+            movie.setFlipped(!movie.isFlipped());
         });
     }
 
@@ -145,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         TmdbApiService apiService = retrofit.create(TmdbApiService.class);
         String apiKey = BuildConfig.TMDB_API_KEY;
 
-        apiService.getPopularMovies(apiKey, currentPage).enqueue(new Callback<MovieResponse>() {
+        apiService.getPopularMovies(apiKey, currentPage).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

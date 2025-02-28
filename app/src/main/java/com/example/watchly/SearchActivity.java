@@ -1,11 +1,16 @@
 package com.example.watchly;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import java.util.Arrays;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -15,11 +20,25 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        pages.setMenuIntent(findViewById(R.id.textSeen), findViewById(R.id.watched), SeenActivity.class);
-        pages.setMenuIntent(findViewById(R.id.textDiscover), findViewById(R.id.discover), MainActivity.class);
-        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchActivity.class);
-        pages.setMenuIntent(findViewById(R.id.textWatchlist), findViewById(R.id.toWatch), WatchlistActivity.class);
-        pages.setLogout(findViewById(R.id.logout));
-        pages.setName(findViewById(R.id.name));
+        RadioButton[] radioButtons = {findViewById(R.id.allTypesButton), findViewById(R.id.movieButton), findViewById(R.id.seriesButton)};
+        for(RadioButton button : radioButtons){
+            button.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+                if (isChecked){
+                    for(RadioButton other : radioButtons){
+                        if(other != button){
+                            other.setChecked(false);
+                        }
+                    }
+                }
+            }));
+        }
+
+        RecyclerView genreRecyclerView = findViewById(R.id.genreRecyclerView);
+
+        List<String> genres = Arrays.asList("Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Fantasy");
+
+        genreRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        GenreAdapter adapter = new GenreAdapter(this, genres);
+        genreRecyclerView.setAdapter(adapter);
     }
 }
