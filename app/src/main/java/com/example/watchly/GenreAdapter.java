@@ -10,15 +10,22 @@ import android.widget.RadioButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHolder> {
     private final List<String> genres;
     private final Context context;
+    private List<String> selectedGenres = new ArrayList<>();
+
 
     public GenreAdapter(Context context, List<String> genres) {
         this.context = context;
         this.genres = genres;
+    }
+
+    public List<String> getSelectedGenres() {
+        return selectedGenres;
     }
 
     @Override
@@ -32,6 +39,11 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
         String genre = genres.get(position);
         holder.checkBox.setText(genre);
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                selectedGenres.add(genre);
+            } else {
+                selectedGenres.remove(genre);
+            }
         });
     }
 

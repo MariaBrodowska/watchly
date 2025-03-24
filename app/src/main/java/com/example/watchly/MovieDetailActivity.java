@@ -17,14 +17,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    private TextView movieTitle, movieDescription, releaseDate, type, language, popularity, voteAverage, voteCount, genres;
+    private TextView movieTitle, movieDescription, releaseDate, type, language, voteAverage, voteCount, genres;
     private ImageView moviePoster;
     TmdbApiService apiService;
     String apiKey = BuildConfig.TMDB_API_KEY;
-
     private Pages pages = new Pages(this);
     private Movie movie;
-
     private Map<Integer, String> genreMap = new HashMap<>(); //lista gatunkow
 
     @Override
@@ -38,7 +36,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         releaseDate = findViewById(R.id.movieReleaseDate);
         type = findViewById(R.id.movieType);
         language = findViewById(R.id.movieLanguage);
-        popularity = findViewById(R.id.moviePopularity);
         voteAverage = findViewById(R.id.movieVoteAverage);
         voteCount = findViewById(R.id.movieVoteCount);
         genres = findViewById(R.id.movieGenres);
@@ -62,29 +59,35 @@ public class MovieDetailActivity extends AppCompatActivity {
         if(page.equals("seen")){
             context = SeenActivity.class;
         }
-        else{
+        else if (page.equals("watchlist")){
             context = WatchlistActivity.class;
+        }
+        else{
+            context = SearchListActivity.class;
         }
         findViewById(R.id.close).setOnClickListener(v -> {
             pages.animateButton(v);
-            Intent intent = new Intent(MovieDetailActivity.this, context);
-            startActivity(intent);
             finish();
         });
     }
 
     private void displayMovieDetails(Movie movie) {
-        movieTitle.setText(movie.getTitle());
-        movieDescription.setText(movie.getOverview());
-        releaseDate.setText("Release date: " + movie.getRelease_date());
-        if(!movie.isVideo()){
+        if(movie.getTitle() != null){
+            movieTitle.setText(movie.getTitle());
             type.setText("Type: Movie");
         }
         else{
+            movieTitle.setText(movie.getName());
             type.setText("Type: Series");
         }
+        movieDescription.setText( movie.getOverview()!=null ? movie.getOverview() : "No description");
+        if(movie.getRelease_date() != null){
+            releaseDate.setText("Release date: " + movie.getRelease_date());
+        }
+        else{
+            releaseDate.setText("First air date: " + movie.getFirst_air_date());
+        }
         language.setText("Original language: " + movie.getOriginal_language());
-        popularity.setText("Popularity: " + movie.getPopularity());
         voteAverage.setText("⭐ " + movie.getVote_average());
         voteCount.setText("(" + movie.getVote_count() + " votes)");
         Glide.with(this)
@@ -95,7 +98,6 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void displayGenres() {
         if (genreMap.isEmpty()) {
             genres.setText("Genres: -");
-//            Log.d("GENRES 1", String.valueOf(genreMap.size()));
         }
         else {
             String movieGenres = "";
@@ -109,10 +111,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             if (!movieGenres.isEmpty()) {
                 movieGenres = movieGenres.substring(0, movieGenres.length() - 2);
                 genres.setText("Genres: " + movieGenres);
-//                Log.d("GENRES 3", String.valueOf(genreMap.size()) + movieGenres);
             } else {
                 genres.setText("Genres: -");
-//                Log.d("GENRES 4", String.valueOf(genreMap.size()) + movieGenres);
             }
         }
     }
@@ -125,14 +125,12 @@ public class MovieDetailActivity extends AppCompatActivity {
                     for (Genres.Genre genre : response.body().getGenres()) {
                         genreMap.put(genre.getId(), genre.getName());
                     }
-//                    Log.d("GENRES", String.valueOf(genreMap.size()));
                 }
                 displayGenres();
             }
             @Override
             public void onFailure(Call<Genres> call, Throwable throwable) {
                 Toast.makeText(MovieDetailActivity.this, "Error loading genres", Toast.LENGTH_SHORT).show();
-//                Log.d("GENRES FAIL", String.valueOf(genreMap.size()));
             }
         });
     }

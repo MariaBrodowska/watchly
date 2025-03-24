@@ -100,6 +100,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:paddingHorizontal="30dp"
+        android:layout_marginTop="20dp"
         android:paddingVertical="10dp"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/types" />
@@ -109,9 +110,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleX="1.1"
+        android:scaleY="0.8"
+        android:layout_marginTop="30dp"
         android:src="@drawable/search_background_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/genreText"
         app:layout_constraintTop_toBottomOf="@+id/genreText" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -123,10 +127,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/genreBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/genreText"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:layout_marginHorizontal="2dp"
-        app:spanCount="3"/>
+        app:layout_constraintTop_toTopOf="@+id/genreBackground"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 
     <TextView
         android:id="@+id/languageText"
@@ -139,6 +141,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:layout_marginTop="-10dp"
         app:layout_constraintTop_toBottomOf="@+id/genreBackground" />
 
     <ImageView
@@ -146,6 +149,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleX="1.1"
+        android:scaleY="1.3"
+        android:layout_marginTop="20dp"
         android:src="@drawable/search_background_field"
         app:layout_constraintTop_toBottomOf="@+id/languageText" />
 
@@ -153,15 +158,13 @@
         android:id="@+id/languageRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="2dp"
         android:orientation="horizontal"
         android:scrollbars="horizontal"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="@+id/languageBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/languageText"
-        app:spanCount="2" />
+        app:layout_constraintTop_toTopOf="@+id/languageBackground"/>
 
     <TextView
         android:id="@+id/sortText"
@@ -174,6 +177,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/languageBackground" />
 
     <ImageView
@@ -181,27 +185,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleX="1.1"
-        android:scaleY="0.6"
-        android:layout_marginTop="-30dp"
+        android:scaleY="0.4"
+        android:layout_marginTop="-40dp"
         android:src="@drawable/search_background_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sortText" />
+
+    <Spinner
+        android:id="@+id/sortSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toTopOf="@id/sortBackground"
+        app:layout_constraintEnd_toEndOf="@id/sortBackground"
+        app:layout_constraintBottom_toBottomOf="@id/sortBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="20dp"
+        />
 
     <ImageView
         android:id="@+id/searchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/search_button"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="-10dp"
         app:layout_constraintTop_toBottomOf="@+id/sortBackground" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search_movies"
+        android:text="Search"
         android:textColor="@color/white"
         android:fontFamily="@font/josefin_sans"
-        android:textSize="16sp"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/searchButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

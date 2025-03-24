@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
     private Context context;
-    private List<Movie> movies;
+    public List<Movie> movies;
     private String pageType;
     private FirestoreManager fm = new FirestoreManager();
 
@@ -35,7 +35,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = movies.get(position);
 
-        holder.movieTitle.setText(movie.getTitle());
+        holder.movieTitle.setText(movie.getTitle() != null ? movie.getTitle() : movie.getName());
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500" + movie.getPoster_path())
                 .into(holder.moviePoster);
@@ -52,12 +52,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             holder.delete.setText("Delete from Seen");
             holder.add.setText("Add to Watchlist");
             holder.delete.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() + " deleted from seen!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " deleted from seen!", Toast.LENGTH_SHORT).show();
                 fm.deleteFromWatched(movie.getId());
                 updateAfterDelete(position);
             });
             holder.add.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() + " added to watchlist!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to watchlist!", Toast.LENGTH_SHORT).show();
                 fm.addToWatchlist(movie);
                 fm.deleteFromWatched(movie.getId());
                 updateAfterDelete(position);
@@ -67,19 +67,34 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             holder.delete.setText("Delete from Watchlist");
             holder.add.setText("Add to Seen");
             holder.delete.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() + " deleted from watchlist!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " deleted from watchlist!", Toast.LENGTH_SHORT).show();
                 fm.deleteFromWatchlist(movie.getId());
                 updateAfterDelete(position);
             });
             holder.add.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() + " added to seen!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to seen!", Toast.LENGTH_SHORT).show();
+                fm.addToWatched(movie);
+                fm.deleteFromWatchlist(movie.getId());
+                updateAfterDelete(position);
+            });
+        }
+        else if(pageType.equals("search")){
+            holder.delete.setText("Add to Watchlist");
+            holder.add.setText("Add to Seen");
+            holder.add.setOnClickListener(v -> {
+                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to watchlist!", Toast.LENGTH_SHORT).show();
+                fm.addToWatchlist(movie);
+                fm.deleteFromWatched(movie.getId());
+                updateAfterDelete(position);
+            });
+            holder.add.setOnClickListener(v -> {
+                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to seen!", Toast.LENGTH_SHORT).show();
                 fm.addToWatched(movie);
                 fm.deleteFromWatchlist(movie.getId());
                 updateAfterDelete(position);
             });
         }
     }
-
     public void updateAfterDelete(int position){
         movies.remove(position);
         notifyItemRemoved(position);

@@ -19,7 +19,9 @@ public class Movie implements Parcelable {
     private double popularity;
     private String poster_path;
     private String release_date;
+    private String first_air_date;
     private String title;
+    private String name;
     private boolean video;
     private double vote_average;
     private int vote_count;
@@ -28,7 +30,7 @@ public class Movie implements Parcelable {
 
     public Movie(boolean adult, String backdrop_path, List<Integer> genre_ids, int id, String original_language,
                  String original_title, String overview, double popularity, String poster_path, String release_date,
-                 String title, boolean video, double vote_average, int vote_count) {
+                 String title, boolean video, double vote_average, int vote_count, String name, String first_air_date) {
         this.adult = adult;
         this.backdrop_path = backdrop_path;
         this.genre_ids = genre_ids;
@@ -43,9 +45,32 @@ public class Movie implements Parcelable {
         this.video = video;
         this.vote_average = vote_average;
         this.vote_count = vote_count;
+        //series
+        this.name = name;
+        this.first_air_date = first_air_date;
     }
 
     public Movie() {
+    }
+
+    public String getDate() {
+        return release_date != null ? release_date : first_air_date;
+    }
+
+    public String getFirst_air_date() {
+        return first_air_date;
+    }
+
+    public void setFirst_air_date(String first_air_date) {
+        this.first_air_date = first_air_date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     protected Movie(Parcel in) {
@@ -54,10 +79,12 @@ public class Movie implements Parcelable {
         id = in.readInt();
         original_language = in.readString();
         original_title = in.readString();
+        name = in.readString();
         overview = in.readString();
         popularity = in.readDouble();
         poster_path = in.readString();
         release_date = in.readString();
+        first_air_date = in.readString();
         title = in.readString();
         video = in.readByte() != 0;
         vote_average = in.readDouble();
@@ -230,10 +257,12 @@ public class Movie implements Parcelable {
         dest.writeInt(id);
         dest.writeString(original_language);
         dest.writeString(original_title);
+        dest.writeString(name);
         dest.writeString(overview);
         dest.writeDouble(popularity);
         dest.writeString(poster_path);
         dest.writeString(release_date);
+        dest.writeString(first_air_date);
         dest.writeString(title);
         dest.writeByte((byte) (video ? 1 : 0));
         dest.writeDouble(vote_average);
