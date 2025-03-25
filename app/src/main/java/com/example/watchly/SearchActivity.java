@@ -133,7 +133,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     }
     private void setLanguageRecyclerView() {
         RecyclerView genreRecyclerView = findViewById(R.id.languageRecyclerView);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.HORIZONTAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
         genreRecyclerView.setLayoutManager(layoutManager);
 //        Log.d("LISTA", languageList.toString());
         LanguageAdapter adapter = new LanguageAdapter(this, languageList);

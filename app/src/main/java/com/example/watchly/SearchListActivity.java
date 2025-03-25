@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -162,8 +163,14 @@ public class SearchListActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTopRatedMovies(){
-        apiService.getTopRatedMovies(apiKey, currentPageMovies).enqueue(new Callback<MovieResponse>() {
+    private void loadMovies(boolean isTopRated){
+        Call<MovieResponse> call;
+        if (isTopRated) {
+            call = apiService.getTopRatedMovies(apiKey, currentPageMovies);
+        } else {
+            call = apiService.getMovies(apiKey, sortSetting, currentPageMovies);
+        }
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 loadingMore = false;
@@ -175,30 +182,6 @@ public class SearchListActivity extends AppCompatActivity {
                     }
                     checkLanguageAndGenre(fetchedMovies);
                     movieSet.addAll(fetchedMovies);
-                    checkIfRequestsCompleted();
-                }
-            }
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable throwable) {
-                loadingMore = false;
-                Toast.makeText(SearchListActivity.this, "Connection error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    private void loadMovies(){
-        apiService.getMovies(apiKey, sortSetting, currentPageMovies).enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                loadingMore = false;
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Movie> fetchedMovies = response.body().getResults();
-                    if (fetchedMovies == null || fetchedMovies.isEmpty()) {
-                        loadingMore = false;
-                        return;
-                    }
-                    checkLanguageAndGenre(fetchedMovies);
-                    movieSet.addAll(fetchedMovies);
-                    Log.d("SEARCH", "Loading movies, page:" + currentPageMovies);
                     checkIfRequestsCompleted();
                 }
             }
@@ -210,8 +193,14 @@ public class SearchListActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTopRatedSeries(){
-        apiService.getTopRatedSeries(apiKey, currentPageSeries).enqueue(new Callback<MovieResponse>() {
+    private void loadSeries(boolean isTopRated){
+        Call<MovieResponse> call;
+        if (isTopRated) {
+            call = apiService.getTopRatedSeries(apiKey, currentPageSeries);
+        } else {
+            call = apiService.getSeries(apiKey, sortSetting, currentPageSeries);
+        }
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 loadingMore = false;
@@ -235,98 +224,47 @@ public class SearchListActivity extends AppCompatActivity {
         });
     }
 
-    private void loadSeries(){
-        apiService.getSeries(apiKey, sortSetting, currentPageSeries).enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                loadingMore = false;
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Movie> fetchedMovies = response.body().getResults();
-
-                    if (fetchedMovies == null || fetchedMovies.isEmpty()) {
-                        loadingMore = false;
-                        return;
-                    }
-                    checkLanguageAndGenre(fetchedMovies);
-                    movieSet.addAll(fetchedMovies);
-                    Log.d("SEARCH", "Loading series, page:" + currentPageSeries);
-                    checkIfRequestsCompleted();
-                }
-            }
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable throwable) {
-                loadingMore = false;
-                Toast.makeText(SearchListActivity.this, "Connection error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    private void sort(List<Movie> newMovies){
+    private void sort(List<Movie> newMovies) {
+        Comparator<Movie> comparator = null;
         switch (sortOption) {
             case "Popularity":
-                newMovies.sort((m1, m2) -> Double.compare(m2.getVote_count(), m1.getVote_count()));
+                comparator = Comparator.comparingDouble(Movie::getVote_count).reversed();
                 break;
             case "Average Rating":
-                newMovies.sort((m1, m2) -> Double.compare(m2.getVote_average(), m1.getVote_average()));
+                comparator = Comparator.comparingDouble(Movie::getVote_average).reversed();
                 break;
             case "Release Date (Newest First)":
-                List<Movie> newList = new ArrayList<>();
-                newMovies.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
-                for (Movie movie : newMovies){
-                    LocalDate movieDate = LocalDate.parse(movie.getDate(), formatter);
-                    LocalDate localDate = LocalDate.now().plusYears(1);
-                    if (movieDate.isBefore(localDate)){
-                        newList.add(movie);
-                    }
-                }
-                newMovies.clear();
-                newMovies.addAll(newList);
-                if(newList.isEmpty()){
-                    loadMoreMovies();
-                }
+                comparator = Comparator.comparing(Movie::getDate).reversed();
                 break;
             case "Release Date (Oldest First)":
-                newMovies.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+                comparator = Comparator.comparing(Movie::getDate);
                 break;
         }
+        if (comparator != null) {
+            newMovies.sort(comparator);
+        }
     }
-
-//    private void sort(List<Movie> newMovies) {
-//        Comparator<Movie> comparator = null;
-//
-//        switch (sortOption) {
-//            case "Popularity":
-//                comparator = Comparator.comparingDouble(Movie::getVote_count).reversed();
-//                break;
-//            case "Average Rating":
-//                comparator = Comparator.comparingDouble(Movie::getVote_average).reversed();
-//                break;
-//            case "Release Date (Newest First)":
-//                comparator = Comparator.comparing(Movie::getDate).reversed();
-//                break;
-//            case "Release Date (Oldest First)":
-//                comparator = Comparator.comparing(Movie::getDate);
-//                break;
-//        }
-//
-//        if (comparator != null) {
-//            newMovies.sort(comparator);
-//        }
-//    }
 
     private void checkIfRequestsCompleted() {
         isLoading--;
         if(isLoading == 0) {
             List<Movie> newMovies = new ArrayList<>(movieSet);
-            Log.d("SEARCH adapter", String.valueOf(movieAdapter.getItemCount()));
+//            Log.d("SEARCH adapter", String.valueOf(movieAdapter.getItemCount()));
 
-            Log.d("SEARCH movieSet", String.valueOf(movieSet));
-            sort(newMovies);
-            Log.d("SEARCH newMovies", String.valueOf(newMovies));
             int previous = movieAdapter.getItemCount();
+            if(previous!=0){ //nie sortujemy juz posortowanych, aby unknac powtarzania sie (movies i series to dwie rozne listy w api)
+                List<Movie> sublist = new ArrayList<>(newMovies.subList(previous, newMovies.size()));
+                sort(sublist);
+                newMovies.subList(previous, newMovies.size()).clear();
+                newMovies.addAll(previous, sublist);
+            }
+            else{
+                sort(newMovies);
+            }
             movieAdapter.movies.clear();
             movieAdapter.movies.addAll(newMovies);
-            Log.d("SEARCH adapter", String.valueOf(movieAdapter.getItemCount()));
-        movieAdapter.notifyItemRangeInserted(previous, newMovies.size());
+//            Log.d("SEARCH adapter", String.valueOf(movieAdapter.getItemCount()));
+            movieAdapter.notifyItemRangeInserted(previous, newMovies.size());
             loadingMore = false;
             if(movieAdapter.getItemCount()>1)
                 showLoading(false);
@@ -341,45 +279,30 @@ public class SearchListActivity extends AppCompatActivity {
             showLoading(true);
         loadingMore = true;
         isLoading = 0;
+        boolean isTopRated = sortOption.equals("Average Rating");
         switch(type){
             case "Movie":
                 isLoading++;
-                if (sortOption.equals("Average Rating")) {
-                    loadTopRatedMovies();
-                } else {
-                    loadMovies();
-                }
+                loadMovies(isTopRated);
                 currentPageMovies++;
                 break;
             case "Series":
                 isLoading++;
-                if(sortOption.equals("Average Rating")){
-                    loadTopRatedSeries();
-                }
-                else{
-                    loadSeries();
-                }
+                loadSeries(isTopRated);
                 currentPageSeries++;
                 break;
             case "All":
-                isLoading+=4;
-                for(int i=0; i<2; i++) {
-                    if (sortOption.equals("Average Rating")) {
-                        loadTopRatedMovies();
-                        loadTopRatedSeries();
-                    } else {
-                        loadMovies();
-                        loadSeries();
-                    }
-                    currentPageMovies++;
-                    currentPageSeries++;
-                }
+                isLoading+=2;
+                loadMovies(isTopRated);
+                loadSeries(isTopRated);
+                currentPageMovies++;
+                currentPageSeries++;
                 break;
         }
     }
 
     private void checkLanguageAndGenre(List<Movie> movies){
-        if(selectedLanguages==null && selectedGenres==null){
+        if (selectedLanguages == null && selectedGenres == null) {
             return;
         }
         Iterator<Movie> iterator = movies.iterator();
@@ -387,15 +310,15 @@ public class SearchListActivity extends AppCompatActivity {
             Movie movie = iterator.next();
             boolean hasLanguage = selectedLanguages.isEmpty();
             boolean hasGenre = selectedGenres.isEmpty();
-            if (selectedLanguages != null){
-                for (String language : selectedLanguages){
-                    if(Objects.equals(languages.get(language), movie.getOriginal_language())){
+            if (!hasLanguage) {
+                for (String language : selectedLanguages) {
+                    if (Objects.equals(languages.get(language), movie.getOriginal_language())) {
                         hasLanguage = true;
                         break;
                     }
                 }
             }
-            if (selectedGenres != null && movie.getGenre_ids() != null) {
+            if (!hasGenre && movie.getGenre_ids() != null) {
                 for (int id : movie.getGenre_ids()) {
                     if (selectedGenres.contains(genreMap.get(id))) {
                         hasGenre = true;
@@ -407,9 +330,8 @@ public class SearchListActivity extends AppCompatActivity {
                 iterator.remove();
             }
         }
-        if(movies.isEmpty()){
+        if (movies.isEmpty()) {
             loadMoreMovies();
         }
     }
-
 }
