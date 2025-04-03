@@ -47,14 +47,6 @@ public class LoginActivity extends AppCompatActivity {
                 activityResultLauncher.launch(intent);
             });
         });
-
-        ImageView fb = findViewById(R.id.fb);
-        ImageView google = findViewById(R.id.google);
-        ImageView twitter = findViewById(R.id.twitter);
-        fb.setOnClickListener(v -> {
-
-        });
-
 //        TextView email = findViewById(R.id.email);
 //        TextView password = findViewById(R.id.password);
 //        TextView loginbtn = findViewById(R.id.buttonLogin);

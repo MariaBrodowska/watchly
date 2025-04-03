@@ -28,6 +28,11 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
         return selectedGenres;
     }
 
+    public void clear() {
+        selectedGenres.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public GenreViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_genre_checkbox, parent, false);

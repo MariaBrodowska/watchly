@@ -67,12 +67,11 @@ public interface TmdbApiService {
             @Query("api_key") String apiKey,
             @Query("page") int page
     );
-//    @GET("search/multi")
-//    Call<MovieResponse> searchMulti(
-//            @Query("api_key") String apiKey,
-//            @Query("sort_by") String sort,
-//            @Query("page") int page,
-//            @Query("media_type") String mediaType
-//    );
-
+    @GET("search/multi")
+    Call<MovieResponse> multiSearch(
+            @Query("api_key") String apiKey,
+            @Query("query") String query,
+            @Query("page") int page,
+            @Query("media_type") String media_type
+    );
 }

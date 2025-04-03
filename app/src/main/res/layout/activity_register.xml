@@ -111,68 +111,51 @@
         android:fontFamily="@font/josefin_sans"
         android:text="@string/or_register_using_social_media"
         android:textColor="@color/black"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:textSize="16sp"
         android:textStyle="normal" />
 
-    <LinearLayout
-        android:id="@+id/socialIcons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/google"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_below="@id/others"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
-        <ImageView
-            android:id="@+id/fb"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginHorizontal="8dp"
-            android:src="@drawable/fb"/>
-        <ImageView
-            android:id="@+id/google"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginHorizontal="10dp"
-            android:src="@drawable/google"/>
-        <ImageView
-            android:id="@+id/twitter"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginHorizontal="13dp"
-            android:src="@drawable/twitter"/>
-    </LinearLayout>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/google"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/socialIcons"
+        android:layout_below="@id/google"
         android:gravity="center"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/josefin_sans"
-            android:gravity="center"
+            android:layout_gravity="bottom"
             android:text="@string/already_have_an_account"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:layout_marginBottom="10dp"
             android:textStyle="normal" />
 
         <TextView
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="bottom"
             android:fontFamily="@font/josefin_sans"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginBottom="10dp"
             android:layout_marginStart="5dp"/>
 
     </LinearLayout>

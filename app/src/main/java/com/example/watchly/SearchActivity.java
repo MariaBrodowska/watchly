@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -45,9 +47,11 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         for(RadioButton button : radioButtons){
             button.setOnCheckedChangeListener(((buttonView, isChecked) -> {
                 if (isChecked){
+                    button.setBackgroundResource(R.drawable.search_movie_checked);
                     for(RadioButton other : radioButtons){
                         if(other != button){
                             other.setChecked(false);
+                            other.setBackgroundResource(R.drawable.search_movie_unchecked);
                         }
                     }
                 }
@@ -69,20 +73,37 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(ad);
 
+        Button clearButton = findViewById(R.id.clearButton);
+        clearButton.setOnClickListener(v -> {
+            radioButtons[0].setChecked(true);
+            for (RadioButton button : radioButtons) {
+                button.setBackgroundResource(R.drawable.search_movie_unchecked);
+            }
+            radioButtons[0].setBackgroundResource(R.drawable.search_movie_checked);
+
+            RecyclerView genreRecyclerView = findViewById(R.id.genreRecyclerView);
+            GenreAdapter genreAdapter = (GenreAdapter) genreRecyclerView.getAdapter();
+            if (genreAdapter != null) {
+                genreAdapter.clear();}
+            RecyclerView languageRecyclerView = findViewById(R.id.languageRecyclerView);
+            LanguageAdapter languageAdapter = (LanguageAdapter) languageRecyclerView.getAdapter();
+            if (languageAdapter != null) {
+                languageAdapter.clear();
+            }
+            spin.setSelection(0);
+        });
+
         setDefaultLanguages();
         getGenres();
         ImageView search = findViewById(R.id.searchButton);
-//        Log.d("INTENT", String.valueOf(genreList.size()));
         search.setOnClickListener(v -> {
             Intent intent = new Intent(SearchActivity.this, SearchListActivity.class);
-//            Log.d("INTENT", String.valueOf(genreList.size()));
             for (RadioButton button : radioButtons){
                 if (button.isChecked()){
                     intent.putExtra("type", button.getText().toString());
                     break;
                 }
             }
-//            Log.d("INTENT", String.valueOf(genreList.size()));
             RecyclerView genreRecyclerView = findViewById(R.id.genreRecyclerView);
             GenreAdapter adapter = (GenreAdapter) genreRecyclerView.getAdapter();
             if (adapter != null) {
@@ -94,9 +115,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 intent.putStringArrayListExtra("languages", new ArrayList<>(adapterLang.getSelectedLanguages()));
             }
             intent.putExtra("sort", spin.getSelectedItem().toString());
+            EditText text = findViewById(R.id.titleText);
+            intent.putExtra("title", text.getText().toString());
             SearchActivity.this.startActivity(intent);
         });
-//        Log.d("GENRES2", String.valueOf(genreList.size()));
     }
 
     private void setDefaultLanguages() {

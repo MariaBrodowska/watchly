@@ -33,7 +33,7 @@ public class GoogleSignInManager {
         this.firebaseAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(context.getString(R.string.client_id))
+                .requestIdToken(BuildConfig.CLIENT_ID)
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(context, options);

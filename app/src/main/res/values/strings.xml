@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Watchly</string>
+<!--  search page  -->
+    <string name="find_next_movie_to_watch">Find next movie to watch</string>
+    <string name="all">All</string>
+    <string name="movie">Movie</string>
+    <string name="series">Series</string>
+    <string name="genres_scroll_to_see_more"><![CDATA[Genres (scroll to see more >>)]]></string>
+    <string name="original_language">Original language</string>
+    <string name="sort_by">Sort by</string>
+    <string name="search_movies">Search movies</string>
+
+<!--  login and register page  -->
+    <string name="hello">Hello</string>
+    <string name="sign_into_your_account">Sign into your Account</string>
+    <string name="email">Email*</string>
+    <string name="password">Password*</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="login">Login</string>
+    <string name="or_login_using_social_media">Or login using social media</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="register_now">Register now</string>
+    <string name="create_account">Create Account</string>
+    <string name="name">Name*</string>
+    <string name="or_register_using_social_media">Or register using social media</string>
+    <string name="already_have_an_account">Already have an account?</string>
+
+    <!--  main page  -->
+    <string name="discover">Discover</string>
+    <string name="seen">Seen</string>
+    <string name="search">Search</string>
+    <string name="watchlist">Watchlist</string>
+</resources>
