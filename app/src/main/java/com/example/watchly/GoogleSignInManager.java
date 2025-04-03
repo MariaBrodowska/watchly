@@ -74,7 +74,6 @@ public class GoogleSignInManager {
     //zapisanie dsnych uzytkownika do firestore
     private void saveUserToFirestore(FirebaseUser user) {
         if (user == null) return;
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> userData = new HashMap<>();
         userData.put("id", user.getUid());
@@ -85,7 +84,6 @@ public class GoogleSignInManager {
         db.collection("users").document(user.getUid())
                 .set(userData, SetOptions.merge())
                 .addOnSuccessListener(aVoid -> {
-//                    Log.d("Firestore", "User data saved.");
                     Intent intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
                     if (context instanceof RegisterActivity) {
