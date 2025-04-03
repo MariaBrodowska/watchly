@@ -2,8 +2,10 @@ package com.example.watchly;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -11,8 +13,12 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class LoginActivity extends AppCompatActivity {
     private GoogleSignInManager googleSignInManager;
+    private FirebaseAuth auth;
 
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -30,6 +36,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        auth = FirebaseAuth.getInstance();
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        TextView loginbtn = findViewById(R.id.buttonLogin);
+
         TextView register = findViewById(R.id.registerNow);
         register.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -40,6 +51,28 @@ public class LoginActivity extends AppCompatActivity {
 
         googleSignInManager = new GoogleSignInManager(this, activityResultLauncher);
 
+        loginbtn.setOnClickListener(v -> {
+           String emailText = email.getText().toString().trim();
+           String passwordText = password.getText().toString().trim();
+           if(emailText.isEmpty() || passwordText.isEmpty()){
+               Toast.makeText(this, "Email and password are required", Toast.LENGTH_SHORT).show();
+               return;
+           }
+            auth.signInWithEmailAndPassword(emailText, passwordText)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = auth.getCurrentUser();
+                        if (user != null) {
+                            Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
+                        }
+                    } else {
+                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        });
+
         googleSignInManager.getGoogleSignInClient().signOut().addOnCompleteListener(this, task -> {
             ImageView signInButton = findViewById(R.id.google);
             signInButton.setOnClickListener(v -> {
@@ -47,18 +80,6 @@ public class LoginActivity extends AppCompatActivity {
                 activityResultLauncher.launch(intent);
             });
         });
-//        TextView email = findViewById(R.id.email);
-//        TextView password = findViewById(R.id.password);
-//        TextView loginbtn = findViewById(R.id.buttonLogin);
-//
-//        loginbtn.setOnClickListener(v -> {
-//            if(email.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
-//                Toast.makeText(ActivityLogin.this, "login successful", Toast.LENGTH_SHORT).show();
-//            }
-//            else {
-//                Toast.makeText(ActivityLogin.this, "login failed", Toast.LENGTH_SHORT).show();
-//            }
-//            });
 
     }
 }
