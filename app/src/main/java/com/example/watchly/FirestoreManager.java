@@ -28,7 +28,7 @@ public class FirestoreManager {
     private Map<String, Object> getMovieData(Movie movie) {
         Map<String, Object> movieData = new HashMap<>();
         movieData.put("id", movie.getId());
-        movieData.put("title", movie.getTitle());
+        movieData.put("title", movie.getTitleName());
         movieData.put("poster_path", movie.getPoster_path());
         movieData.put("release_date", movie.getRelease_date());
         movieData.put("vote_average", movie.getVote_average());

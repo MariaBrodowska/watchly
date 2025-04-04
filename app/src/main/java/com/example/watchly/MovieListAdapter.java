@@ -2,6 +2,7 @@ package com.example.watchly;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import java.util.List;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
@@ -35,13 +38,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = movies.get(position);
 
-        holder.movieTitle.setText(movie.getTitle() != null ? movie.getTitle() : movie.getName());
+        holder.movieTitle.setText(movie.getTitleName());
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500" + movie.getPoster_path())
                 .into(holder.moviePoster);
 
         holder.itemView.setOnClickListener(v -> {
-//            Log.d("MOVIE GENRES!!!!", movie.getAll());
             Intent intent = new Intent(context, MovieDetailActivity.class);
             intent.putExtra("movie", movie);  //przeslanie obiektu
             intent.putExtra("pageType", pageType);
@@ -52,12 +54,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             holder.delete.setText("Delete from Seen");
             holder.add.setText("Add to Watchlist");
             holder.delete.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " deleted from seen!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitleName() + " deleted from seen!", Toast.LENGTH_SHORT).show();
                 fm.deleteFromWatched(movie.getId());
                 updateAfterDelete(position);
             });
             holder.add.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to watchlist!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitleName() + " added to watchlist!", Toast.LENGTH_SHORT).show();
                 fm.addToWatchlist(movie);
                 fm.deleteFromWatched(movie.getId());
                 updateAfterDelete(position);
@@ -67,28 +69,30 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             holder.delete.setText("Delete from Watchlist");
             holder.add.setText("Add to Seen");
             holder.delete.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " deleted from watchlist!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitleName() + " deleted from watchlist!", Toast.LENGTH_SHORT).show();
                 fm.deleteFromWatchlist(movie.getId());
                 updateAfterDelete(position);
             });
             holder.add.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to seen!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitleName() + " added to seen!", Toast.LENGTH_SHORT).show();
                 fm.addToWatched(movie);
                 fm.deleteFromWatchlist(movie.getId());
                 updateAfterDelete(position);
             });
         }
         else if(pageType.equals("search")){
-            holder.delete.setText("Add to Watchlist");
-            holder.add.setText("Add to Seen");
+            holder.delete.setBackground(ContextCompat.getDrawable(context, R.drawable.search_state));
+            holder.add.setBackground(ContextCompat.getDrawable(context, R.drawable.search_state));
+            holder.delete.setText("Add to Seen");
+            holder.add.setText("Add to Watchlist");
             holder.add.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to watchlist!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, movie.getTitleName() + " added to watchlist!", Toast.LENGTH_SHORT).show();
                 fm.addToWatchlist(movie);
                 fm.deleteFromWatched(movie.getId());
                 updateAfterDelete(position);
             });
-            holder.add.setOnClickListener(v -> {
-                Toast.makeText(context, movie.getTitle() != null ? movie.getTitle() : movie.getName() + " added to seen!", Toast.LENGTH_SHORT).show();
+            holder.delete.setOnClickListener(v -> {
+                Toast.makeText(context, movie.getTitleName() + " added to seen!", Toast.LENGTH_SHORT).show();
                 fm.addToWatched(movie);
                 fm.deleteFromWatchlist(movie.getId());
                 updateAfterDelete(position);

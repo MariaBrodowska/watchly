@@ -56,7 +56,9 @@ public class Movie implements Parcelable {
     public String getDate() {
         return release_date != null ? release_date : first_air_date;
     }
-
+    public String getTitleName(){
+        return title != null ? title : name;
+    }
     public String getFirst_air_date() {
         return first_air_date;
     }
