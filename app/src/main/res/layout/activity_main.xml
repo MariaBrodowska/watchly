@@ -23,82 +23,127 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonBar"
+        app:layout_constraintBottom_toTopOf="@id/bar"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent">
     </com.lorentzos.flingswipe.SwipeFlingAdapterView>
 
-    <ImageView
-        android:id="@+id/buttonBar"
-        android:layout_width="261dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/button_bar" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frontLayout"
+            android:layout_width="match_parent"
+            android:layout_height="570dp"
+            app:layout_constraintTop_toTopOf="@id/swipeView"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/icons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/frontLayout"
+                app:layout_constraintStart_toStartOf="@id/frontLayout"
+                app:layout_constraintEnd_toEndOf="@id/frontLayout"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="20dp">
+                <ImageView
+                    android:id="@+id/buttonReturn"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginHorizontal="17dp"
+                    android:src="@drawable/poster_back"/>
+                <ImageView
+                    android:id="@+id/buttonSkip"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginHorizontal="17dp"
+                    android:src="@drawable/poster_no"/>
+                <ImageView
+                    android:id="@+id/buttonSeen"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginHorizontal="17dp"
+                    android:src="@drawable/poster_seen"/>
+                <ImageView
+                    android:id="@+id/buttonAdd"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginHorizontal="17dp"
+                    android:src="@drawable/poster_watchlist"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/buttonBar"-->
+<!--        android:layout_width="261dp"-->
+<!--        android:layout_height="69dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:srcCompat="@drawable/button_bar" />-->
 
 
-    <ImageView
-        android:id="@+id/buttonReturn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="40dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/bar"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSeen"
-        app:layout_constraintHorizontal_bias="0.361"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/button_return1" />
+<!--    <ImageView-->
+<!--        android:id="@+id/buttonReturn"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginBottom="40dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bar"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/buttonSeen"-->
+<!--        app:layout_constraintHorizontal_bias="0.361"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:srcCompat="@drawable/button_return1" />-->
 
-    <ImageView
-        android:id="@+id/buttonSkip"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/bar"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSeen"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/button_skip_state"/>
+<!--    <ImageView-->
+<!--        android:id="@+id/buttonSkip"-->
+<!--        android:layout_width="45dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_marginBottom="32dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bar"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/buttonSeen"-->
+<!--        app:layout_constraintHorizontal_bias="0.909"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:background="@drawable/button_skip_state"/>-->
 
-    <ImageView
-        android:id="@+id/buttonSeen"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
-        android:layout_weight="1"
-        android:background="@drawable/button_seen_state"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/buttonSeen"-->
+<!--        android:layout_width="45dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_marginBottom="32dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@drawable/button_seen_state"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/buttonAdd"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toEndOf="@+id/buttonSeen"
-        android:background="@drawable/button_add_state"/>
+<!--    <ImageView-->
+<!--        android:id="@+id/buttonAdd"-->
+<!--        android:layout_width="45dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_marginBottom="32dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.09"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/buttonSeen"-->
+<!--        android:background="@drawable/button_add_state"/>-->
 
 
     <ImageView
         android:id="@+id/bar"
         android:layout_width="417dp"
-        android:layout_height="81dp"
+        android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,36 +160,37 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/backgroundImage"
-        app:layout_constraintVertical_bias="0.97">
+        app:layout_constraintVertical_bias="0.977">
 
         <ImageView
             android:id="@+id/watched"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/seen" />
 
         <ImageView
             android:id="@+id/discover"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/discover" />
 
         <ImageView
             android:id="@+id/search"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
+            android:outlineSpotShadowColor="@color/black"
             app:srcCompat="@drawable/search" />
 
         <ImageView
             android:id="@+id/toWatch"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/to_watch" />
@@ -162,32 +208,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/current" />
 
+    <TextView
+        android:id="@+id/name"
+        android:fontFamily="@font/josefin_sans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF"/>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/userLogout"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="5dp"
         android:gravity="end">
         <TextView
-            android:id="@+id/name"
+            android:text="Logout"
+            android:fontFamily="@font/josefin_sans"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="5dp"
-            android:textSize="18sp"
-            android:textStyle="italic"
-            android:textColor="#FF9800"/>
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="2dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"/>
         <ImageView
             android:id="@+id/logout"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="7dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.956"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/backgroundImage"
-            app:srcCompat="@drawable/logout" />
+            app:srcCompat="@drawable/logout2" />
     </LinearLayout>
-
     <TextView
         android:id="@+id/page"
         android:layout_width="wrap_content"

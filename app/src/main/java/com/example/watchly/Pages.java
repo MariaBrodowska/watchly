@@ -97,7 +97,7 @@ public class Pages {
             String userName = currentUser.getDisplayName();
             name.setText(userName);
         } else {
-            name.setText("Guest");
+            name.setText("");
         }
     }
     public void setLogout(ImageView logout){

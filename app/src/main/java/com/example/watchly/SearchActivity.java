@@ -42,6 +42,11 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        ImageView back = findViewById(R.id.arrow);
+        back.setOnClickListener(v -> {
+            finish();
+        });
+
         //tylko jeden zaznaczony
         RadioButton[] radioButtons = {findViewById(R.id.allTypesButton), findViewById(R.id.movieButton), findViewById(R.id.seriesButton)};
         for(RadioButton button : radioButtons){
@@ -117,8 +122,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             intent.putExtra("sort", spin.getSelectedItem().toString());
             EditText text = findViewById(R.id.titleText);
             intent.putExtra("title", text.getText().toString());
+            finish();
             SearchActivity.this.startActivity(intent);
         });
+
     }
 
     private void setDefaultLanguages() {

@@ -1,5 +1,6 @@
 package com.example.watchly;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +40,12 @@ public class WatchlistActivity extends AppCompatActivity {
 
         pages.setMenuIntent(findViewById(R.id.textSeen), findViewById(R.id.watched), SeenActivity.class);
         pages.setMenuIntent(findViewById(R.id.textDiscover), findViewById(R.id.discover), MainActivity.class);
-        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchListActivity.class);
+        findViewById(R.id.search).setOnClickListener(v -> {
+            pages.animateButton(v);
+            Intent intent = new Intent(WatchlistActivity.this, SearchActivity.class);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(WatchlistActivity.this);
+            startActivity(intent, options.toBundle());
+        });
         pages.setMenuIntent(findViewById(R.id.textWatchlist), findViewById(R.id.toWatch), WatchlistActivity.class);
         pages.setLogout(findViewById(R.id.logout));
         pages.setName(findViewById(R.id.name));

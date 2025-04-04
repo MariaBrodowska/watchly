@@ -78,6 +78,7 @@ public class MovieAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_movie_card, parent, false);
         }
         ImageView poster = convertView.findViewById(R.id.moviePoster);
+        TextView frontTitle = convertView.findViewById(R.id.frontTitle);
         View frontView = convertView.findViewById(R.id.frontLayout);
         View backView = convertView.findViewById(R.id.backLayout);
         Movie movie = getItem(position);
@@ -89,6 +90,7 @@ public class MovieAdapter extends BaseAdapter {
         TextView description = backView.findViewById(R.id.description);
 
         title.setText(movie.getTitle());
+        frontTitle.setText(movie.getTitle());
         review.setText(String.format("%.2f", movie.getVote_average()));
         reviewCount.setText("("+String.valueOf(movie.getVote_count())+")");
         ImageView[] stars = new ImageView[]{
@@ -114,6 +116,7 @@ public class MovieAdapter extends BaseAdapter {
             Log.d("MovieAdapter", "Poster Path err: " + posterPath);
 
         }
+
         if (secondPath != null && !secondPath.isEmpty()) {
             Glide.with(context)
                     .load("https://image.tmdb.org/t/p/w500" + secondPath)
