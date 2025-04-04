@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    >
+    android:background="#000000">
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -23,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        android:paddingBottom="-20dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@id/icons"
         app:layout_constraintEnd_toEndOf="@id/iconText"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,12 +40,11 @@
     <ImageView
         android:id="@+id/bar"
         android:layout_width="417dp"
-        android:layout_height="81dp"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView"
+        android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bar1" />
+        app:srcCompat="@drawable/bar" />
 
     <LinearLayout
         android:id="@+id/icons"
@@ -59,36 +57,36 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/backgroundImage"
-        app:layout_constraintVertical_bias="0.97">
+        app:layout_constraintVertical_bias="0.977">
 
         <ImageView
             android:id="@+id/watched"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/seen" />
 
         <ImageView
             android:id="@+id/discover"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/discover" />
 
         <ImageView
             android:id="@+id/search"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/search" />
 
         <ImageView
             android:id="@+id/toWatch"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/to_watch" />
@@ -107,37 +105,45 @@
         app:srcCompat="@drawable/current" />
 
 
-    <LinearLayout
-        android:id="@+id/user"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/name"
+        android:fontFamily="@font/josefin_sans"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="end"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="15dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF"/>
+
+    <LinearLayout
+        android:id="@+id/userLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="5dp">
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="5dp"
+        android:gravity="end">
         <TextView
-            android:id="@+id/name"
+            android:text="Logout"
+            android:fontFamily="@font/josefin_sans"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="5dp"
-            android:textColor="#FF9800"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="2dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"/>
         <ImageView
             android:id="@+id/logout"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="7dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.956"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/backgroundImage"
-            app:srcCompat="@drawable/logout" />
+            app:srcCompat="@drawable/logout2" />
     </LinearLayout>
 
     <TextView
@@ -149,10 +155,21 @@
         android:text="Search"
         android:textColor="#E7E3E3"
         android:textSize="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/searchNew"
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/searchNew"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/page"
+        app:layout_constraintBottom_toBottomOf="@id/page"
+        />
 
     <LinearLayout
         android:id="@+id/iconText"

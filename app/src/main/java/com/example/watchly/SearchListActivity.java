@@ -61,7 +61,8 @@ public class SearchListActivity extends AppCompatActivity {
 
         pages.setMenuIntent(findViewById(R.id.textSeen), findViewById(R.id.watched), SeenActivity.class);
         pages.setMenuIntent(findViewById(R.id.textDiscover), findViewById(R.id.discover), MainActivity.class);
-        findViewById(R.id.search).setOnClickListener(v -> {
+        pages.setMenuIntent(findViewById(R.id.textSearch), findViewById(R.id.search), SearchListActivity.class);
+        findViewById(R.id.searchNew).setOnClickListener(v -> {
             pages.animateButton(v);
             Intent intent = new Intent(SearchListActivity.this, SearchActivity.class);
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SearchListActivity.this);
@@ -74,53 +75,79 @@ public class SearchListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         getGenres();
         setDefaultLanguages();
-
-        type = intent.getStringExtra("type");
-        selectedGenres = intent.getStringArrayListExtra("genres");
-        selectedLanguages = intent.getStringArrayListExtra("languages");
-        sortOption = intent.getStringExtra("sort");
-        title = intent.getStringExtra("title");
-        if (sortOption != null) {
-            switch (sortOption) {
-                case "Popularity":
-                    sortSetting = "vote_count.desc"; //discover/movie
-                    break;
-                case "Average Rating":
-                    sortSetting = "vote_average.desc"; //top_rated
-                    break;
-                case "Release Date (Newest First)":
-                    sortSetting = Objects.equals(type, "Movie") ? "release_date.desc" : "first_air_date.desc";
-                    break;
-                case "Release Date (Oldest First)":
-                    sortSetting = Objects.equals(type, "Movie") ? "release_date.asc" : "first_air_date.asc";
-                    break;
-                default:
-                    sortSetting = "vote_count.desc";
+        if(intent.getStringExtra("type") != null){
+            type = intent.getStringExtra("type");
+            selectedGenres = intent.getStringArrayListExtra("genres");
+            selectedLanguages = intent.getStringArrayListExtra("languages");
+            sortOption = intent.getStringExtra("sort");
+            title = intent.getStringExtra("title");
+            if (sortOption != null) {
+                switch (sortOption) {
+                    case "Popularity":
+                        sortSetting = "vote_count.desc"; //discover/movie
+                        break;
+                    case "Average Rating":
+                        sortSetting = "vote_average.desc"; //top_rated
+                        break;
+                    case "Release Date (Newest First)":
+                        sortSetting = Objects.equals(type, "Movie") ? "release_date.desc" : "first_air_date.desc";
+                        break;
+                    case "Release Date (Oldest First)":
+                        sortSetting = Objects.equals(type, "Movie") ? "release_date.asc" : "first_air_date.asc";
+                        break;
+                    default:
+                        sortSetting = "vote_count.desc";
+                }
+            } else {
+                sortSetting = "vote_count.desc";
             }
-        } else {
-            sortSetting = "vote_count.desc";
-        }
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        movieAdapter = new MovieListAdapter(this, new ArrayList<>(movieSet), "search");
-        recyclerView.setAdapter(movieAdapter);
+            recyclerView = findViewById(R.id.recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            movieAdapter = new MovieListAdapter(this, new ArrayList<>(movieSet), "search");
+            recyclerView.setAdapter(movieAdapter);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@androidx.annotation.NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@androidx.annotation.NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
 
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == movieAdapter.getItemCount() - 1) {
-                    if (!loadingMore && currentPageMovies <= MAX_PAGES && currentPageSeries <= MAX_PAGES) {
-                        loadMoreMovies();
+                    LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                    if (layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == movieAdapter.getItemCount() - 1) {
+                        if (!loadingMore && currentPageMovies <= MAX_PAGES && currentPageSeries <= MAX_PAGES) {
+                            loadMoreMovies();
+                        }
                     }
                 }
-            }
-        });
-        movieSet.clear();
-        loadMoreMovies();
+            });
+            movieSet.clear();
+            loadMoreMovies();
+        }
+        else{
+            type = "All";
+            sortOption = "Popularity";
+            sortSetting = "vote_count.desc";
+            recyclerView = findViewById(R.id.recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            movieAdapter = new MovieListAdapter(this, new ArrayList<>(movieSet), "search");
+            recyclerView.setAdapter(movieAdapter);
+
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@androidx.annotation.NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                    if (layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == movieAdapter.getItemCount() - 1) {
+                        if (!loadingMore && currentPageMovies <= MAX_PAGES && currentPageSeries <= MAX_PAGES) {
+                            loadMoreMovies();
+                        }
+                    }
+                }
+            });
+            movieSet.clear();
+            loadMoreMovies();
+        }
     }
     private void showLoading(boolean show) {
         ProgressBar progressBar = findViewById(R.id.progressBar);

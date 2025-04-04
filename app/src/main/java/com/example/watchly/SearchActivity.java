@@ -122,8 +122,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             intent.putExtra("sort", spin.getSelectedItem().toString());
             EditText text = findViewById(R.id.titleText);
             intent.putExtra("title", text.getText().toString());
-            finish();
             SearchActivity.this.startActivity(intent);
+            finish();
         });
 
     }
