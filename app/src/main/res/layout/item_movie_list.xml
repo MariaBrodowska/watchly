@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:gravity="center_vertical"
-            android:text="Movie Title"
+            android:text="@string/movie_title"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

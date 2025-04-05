@@ -38,9 +38,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/josefin_sans"
         android:paddingTop="30dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="2dp"
         android:layout_marginStart="5dp"
-        android:text="Find next title to watch"
+        android:text="@string/find_next_title_to_watch"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="36sp"
@@ -51,11 +51,56 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_height="2dp"
         android:background="#565656"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle"
         tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        android:hint="@string/enter_the_name_of_the_movie_or_series"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintBottom_toTopOf="@id/types"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="#565656" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="10dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="#565656" />
+    </LinearLayout>
+
 
     <RadioGroup
         android:id="@+id/types"
@@ -64,7 +109,7 @@
         android:foregroundGravity="center_vertical"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/line"
         android:layout_marginTop="20dp"
         tools:layout_editor_absoluteX="16dp">
 
@@ -214,50 +259,6 @@
         android:paddingHorizontal="20dp"
         />
 
-    <LinearLayout
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/sortSpinner"
-        app:layout_constraintBottom_toTopOf="@id/titleText"
-        android:gravity="center"
-        android:layout_marginTop="30dp">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="#565656" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OR"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginHorizontal="10dp" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="#565656" />
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/titleText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/line"
-        android:hint="Enter the title of the movie or series"
-        android:background="@drawable/rounded_edittext"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp"
-        android:textSize="16sp" />
-
     <Button
         android:id="@+id/clearButton"
         android:layout_width="0dp"
@@ -266,13 +267,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/searchButton"
         android:layout_marginTop="30dp"
-        android:text="CLEAR"
+        android:text="@string/clear"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:background="@drawable/rounded_button"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"/>
+        app:layout_constraintTop_toBottomOf="@+id/sortSpinner"/>
 
     <ImageView
         android:id="@+id/searchButton"
@@ -286,12 +287,11 @@
         app:layout_constraintStart_toEndOf="@id/clearButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+        app:layout_constraintTop_toBottomOf="@+id/sortSpinner" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SEARCH"
+        android:text="@string/search_btn"
         android:textColor="@color/white"
         android:fontFamily="@font/josefin_sans"
         android:textSize="14sp"

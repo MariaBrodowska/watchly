@@ -115,12 +115,9 @@ public class FirestoreManager {
                                     Movie movie = document.toObject(Movie.class);
                                     movies.add(movie);
                                 }
-                                Log.d("FIRESTORE", "OBEJRZANE: " + movies.size());
                                 watchedMovies = movies;
                                 listener.onMoviesLoaded(movies);
                             }
-                        } else {
-//                            Log.e("FIRESTORE", "Error getting watched movies", task.getException());
                         }
                     }
                 });
@@ -145,8 +142,6 @@ public class FirestoreManager {
                                 toWatchMovies = movies;
                                 listener.onMoviesLoaded(movies);
                             }
-                        } else {
-//                            Log.e("FIRESTORE", "Error getting movies to watch", task.getException());
                         }
                     }
                 });

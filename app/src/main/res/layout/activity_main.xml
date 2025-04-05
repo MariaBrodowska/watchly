@@ -163,7 +163,7 @@
         android:layout_margin="5dp"
         android:gravity="end">
         <TextView
-            android:text="Logout"
+            android:text="@string/logout"
             android:fontFamily="@font/josefin_sans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
