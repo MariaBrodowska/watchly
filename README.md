@@ -3,7 +3,7 @@
   <h1>Watchly</h1>
 </div>
 
-Watchly is an Android app designed to help users discover, organize, and store a personalized list of movies and TV shows. The app integrates with the [TMDb API](https://www.themoviedb.org/) to fetch up-to-date movie data, while storing user preferences (watched, to-watch lists) in **Firebase Firestore**. Additionally, the app provides user authentication through both Google and email, an intuitive swipe interface, and advanced search filters for an enhanced movie discovery experience.
+Watchly is an Android app designed to help users discover, organize, and store a personalized list of movies and TV shows. The app integrates with the **TMDb API** to fetch up-to-date movie data, while storing user preferences (watched, to-watch lists) in **Firebase Firestore**. Additionally, the app provides user authentication through both Google and email, an intuitive swipe interface and advanced search filters for an enhanced movie discovery experience.
 
 ---
 
@@ -151,6 +151,6 @@ The following technologies were used to build the app:
 - **Firebase Authentication** – provides authentication mechanisms for logging in with either email or Google.
 - **Glide** – a popular image loading library for efficiently loading and displaying movie posters.
 - **Retrofit** – a powerful library used to make network requests to the TMDb API.
-- **Swipe Cards Library** – `com.lorentzos.swipecards:library` is used for implementing the swipeable card UI, enhancing the user interaction.
+- **Swipe Cards Library** – "com.lorentzos.swipecards:library" is used for implementing the swipeable card UI.
 
 ---
