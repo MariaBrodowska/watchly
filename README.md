@@ -39,10 +39,7 @@ This interactive and visually engaging **swipe card UI** is designed to offer an
 
   <div>
     <p><strong>➡️ Browsing Movies – Using Buttons</strong></p>
-    <video width="200" autoplay muted loop>
-      <source src="screenshots/discover_click.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    ![](https://github.com/user-attachments/assets/0602389b-4a3c-4640-bd66-431dfd1c30c8)
   </div>
 
   <div>
