@@ -30,7 +30,7 @@ public class FirestoreManager {
         movieData.put("id", movie.getId());
         movieData.put("title", movie.getTitleName());
         movieData.put("poster_path", movie.getPoster_path());
-        movieData.put("release_date", movie.getRelease_date());
+        movieData.put("release_date", movie.getDate());
         movieData.put("vote_average", movie.getVote_average());
         movieData.put("vote_count", movie.getVote_count());
         movieData.put("popularity", movie.getPopularity());
@@ -120,7 +120,7 @@ public class FirestoreManager {
                                 listener.onMoviesLoaded(movies);
                             }
                         } else {
-                            Log.e("FIRESTORE", "Error getting watched movies", task.getException());
+//                            Log.e("FIRESTORE", "Error getting watched movies", task.getException());
                         }
                     }
                 });
@@ -142,12 +142,11 @@ public class FirestoreManager {
                                     Movie movie = document.toObject(Movie.class);
                                     movies.add(movie);
                                 }
-//                                Log.d("FIRESTORE", "DO OBEJRZENIA: " + movies.size());
                                 toWatchMovies = movies;
                                 listener.onMoviesLoaded(movies);
                             }
                         } else {
-                            Log.e("FIRESTORE", "Error getting movies to watch", task.getException());
+//                            Log.e("FIRESTORE", "Error getting movies to watch", task.getException());
                         }
                     }
                 });

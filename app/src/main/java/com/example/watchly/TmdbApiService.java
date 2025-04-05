@@ -33,15 +33,6 @@ public interface TmdbApiService {
             @Query("sort_by") String sort
     );
 
-//    @GET("discover/movie")
-//    Call<MovieResponse> getMovies(
-//            @Query("api_key") String apiKey,
-////            @Query("page") int page,
-//            @Query("with_genres") String genres,
-//            @Query("language") String language,
-//            @Query("sort_by") String sort
-//    );
-//discover/movie
     @GET("discover/movie")
     Call<MovieResponse> getMovies(
             @Query("api_key") String apiKey,

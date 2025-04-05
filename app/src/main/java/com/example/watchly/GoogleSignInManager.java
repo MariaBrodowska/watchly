@@ -49,7 +49,7 @@ public class GoogleSignInManager {
                 ).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        saveUserToFirestore(user); //zapisanie uzytkownika
+                        saveUserToFirestore(user);
                         Toast.makeText(context, "Signed in successfully", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Sign in failed", Toast.LENGTH_SHORT).show();
@@ -70,7 +70,6 @@ public class GoogleSignInManager {
         return RC_SIGN_IN;
     }
 
-    //zapisanie dsnych uzytkownika do firestore
     private void saveUserToFirestore(FirebaseUser user) {
         if (user == null) return;
         FirebaseFirestore db = FirebaseFirestore.getInstance();

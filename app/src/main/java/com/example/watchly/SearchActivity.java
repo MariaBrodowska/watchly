@@ -150,7 +150,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         languages.put("Norwegian", "no");
         languages.put("Hebrew", "he");
         languageList = new ArrayList<>(languages.keySet());
-//        Log.d("LISTA", languageList.toString());
         setLanguageRecyclerView();
     }
     private void setGenreRecyclerView() {
@@ -164,7 +163,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         RecyclerView genreRecyclerView = findViewById(R.id.languageRecyclerView);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
         genreRecyclerView.setLayoutManager(layoutManager);
-//        Log.d("LISTA", languageList.toString());
         LanguageAdapter adapter = new LanguageAdapter(this, languageList);
         genreRecyclerView.setAdapter(adapter);
     }
@@ -175,9 +173,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 if (response.isSuccessful() && response.body() != null) {
                     for (Genres.Genre genre : response.body().getGenres()) {
                         genreList.add(genre.getName());
-//                        Log.d("GENRES", genre.getName());
                     }
-//                    Log.d("GENRES", String.valueOf(genreList.size()));
                     setGenreRecyclerView();
                 }
             }
@@ -194,15 +190,12 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 if (response.isSuccessful() && response.body() != null) {
                     for (Language language : response.body()) {
                         languageList.add(language.getEnglishName());
-//                        Log.d("LANGUAGES", language.getEnglishName());
                     }
-//                    Log.d("LANGUAGES", String.valueOf(languageList.size()));
                     setLanguageRecyclerView();
                 }
             }
             @Override
             public void onFailure(Call<List<Language>> call, Throwable throwable) {
-//                Log.e("LANGUAGES", throwable);
                 Toast.makeText(SearchActivity.this, "Error loading languages", Toast.LENGTH_SHORT).show();
             }
         });

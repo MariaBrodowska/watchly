@@ -31,15 +31,6 @@ public class MovieAdapter extends BaseAdapter {
         return position;
     }
     public void flipCard(View convertView, View frontView, View backView) {
-//        if (frontView.getVisibility() == View.VISIBLE) {
-//            // Flip to back
-//            frontView.setVisibility(View.INVISIBLE);
-//            backView.setVisibility(View.VISIBLE);
-//        } else {
-//            // Flip to front
-//            backView.setVisibility(View.INVISIBLE);
-//            frontView.setVisibility(View.VISIBLE);
-//        }
         convertView.setEnabled(false);
         convertView.animate().rotationY(80f).setDuration(300).withEndAction(new Runnable() {
             @Override
@@ -103,7 +94,6 @@ public class MovieAdapter extends BaseAdapter {
         setStars(movie.getVote_average(), stars);
 
         description.setText(movie.getOverview());
-        Log.d("GATUNKI", "DIZALA: " + movie.getGenre_ids());
         String posterPath = movie.getPoster_path();
         String secondPath = movie.getBackdrop_path();
 
@@ -111,10 +101,6 @@ public class MovieAdapter extends BaseAdapter {
             Glide.with(context)
                     .load("https://image.tmdb.org/t/p/w500" + posterPath)
                     .into(poster);
-            Log.d("MovieAdapter", "0 err");
-        } else {
-            Log.d("MovieAdapter", "Poster Path err: " + posterPath);
-
         }
 
         if (secondPath != null && !secondPath.isEmpty()) {
@@ -124,11 +110,9 @@ public class MovieAdapter extends BaseAdapter {
         }
 
         if (movie.isFlipped()) {
-            Log.d("MovieAdapter", "Dziala 1!");
             frontView.setVisibility(View.INVISIBLE);
             backView.setVisibility(View.VISIBLE);
         } else {
-            Log.d("MovieAdapter", "Dziala 2!");
             frontView.setVisibility(View.VISIBLE);
             backView.setVisibility(View.INVISIBLE);
         }

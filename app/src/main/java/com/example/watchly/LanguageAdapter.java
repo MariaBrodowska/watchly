@@ -48,7 +48,6 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked){
                 selectedLanguages.add(language);
-                Log.d("BLAD", "GFGS");
             }
             else{
                 selectedLanguages.remove(language);

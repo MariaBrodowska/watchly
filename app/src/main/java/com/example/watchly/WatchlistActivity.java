@@ -54,7 +54,6 @@ public class WatchlistActivity extends AppCompatActivity {
         fm.getWatchlist(movies -> {
             toWatchMovies.clear();
             toWatchMovies.addAll(movies);
-            Log.d("DO OBEJRZENIA WATCHLIST", "DO OBEJRZENIA: " + toWatchMovies.size());
             adapter = new MovieListAdapter(WatchlistActivity.this, toWatchMovies, "watchlist");
             recyclerView.setAdapter(adapter);
         });

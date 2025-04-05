@@ -23,7 +23,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     String apiKey = BuildConfig.TMDB_API_KEY;
     private Pages pages = new Pages(this);
     private Movie movie;
-    private Map<Integer, String> genreMap = new HashMap<>(); //lista gatunkow
+    private Map<Integer, String> genreMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

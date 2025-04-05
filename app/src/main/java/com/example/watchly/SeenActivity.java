@@ -52,8 +52,7 @@ public class SeenActivity extends AppCompatActivity{
 
         fm.getWatched(movies -> {
             seenMovies.clear();
-            seenMovies.addAll(movies); //resetujemy
-//                Log.d("OBEJRZANE SEEN", "OBEJRZANE: " + seenMovies.size());
+            seenMovies.addAll(movies);
             adapter = new MovieListAdapter(SeenActivity.this, seenMovies, "seen");
             recyclerView.setAdapter(adapter);
         });

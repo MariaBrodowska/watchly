@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-//                Toast.makeText(MainActivity.this, "Skip", Toast.LENGTH_SHORT).show();
                 returnMovies.add(0,(Movie) dataObject);
             }
             @Override
@@ -114,11 +113,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loadMoreMovies(); //pierwsza strona
+        loadMoreMovies();
         swipeView.setOnItemClickListener((item, object) -> {
-//                Log.d("MovieAdapter", "KLIKNIETO W MAIN!");
             Movie movie = movieAdapter.getItem(item);
-            View convertView = swipeView.getSelectedView(); //widok zaznaczonej karty
+            View convertView = swipeView.getSelectedView();
             View frontView = convertView.findViewById(R.id.frontLayout);
             View backView = convertView.findViewById(R.id.backLayout);
             if(!movie.isFlipped()) {
@@ -133,11 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadMoreMovies() {
         if (currentPage > MAX_PAGES) {
-            currentPage = 1; //reset
+            currentPage = 1;
         }
-
-        isLoading = true; //pobieranie
-
+        isLoading = true;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")
                 .addConverterFactory(GsonConverterFactory.create())
