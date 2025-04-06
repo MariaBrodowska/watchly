@@ -39,12 +39,12 @@ This interactive and visually engaging **swipe card UI** is designed to offer an
 
   <div>
     <p><strong>➡️ Browsing Movies – Using Buttons</strong></p>
-    ![](screenshots/discover_click.gif)
+    <img src="screenshots/discover_click.gif" alt="Discover Click Preview" width="200" />
   </div>
 
   <div>
     <p><strong>👆 Browsing Movies – Swiping Cards</strong></p>
-    ![](screenshots/discover_swipe.gif) 
+    <img src="screenshots/discover_swipe.gif" alt="Discover Swipe Preview" width="200" />
   </div>
 
 </div>
@@ -65,10 +65,7 @@ The **Seen Screen** displays movies that the user has already watched. This scre
 
   <div>
     <p><strong>Browsing Watched Movies</strong></p>
-    <video width="250" autoplay muted loop>
-      <source src="screenshots/seen.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <img src="screenshots/seen.gif" alt="Seen Preview" width="250" />
   </div>
 </div>
 
@@ -87,10 +84,7 @@ The **Watchlist Screen** is where you store movies that you plan to watch later.
   </div>
   <div>
     <p><strong>Browsing Movies To Watch</strong></p>
-    <video width="250" autoplay muted loop>
-      <source src="screenshots/watchlist.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <img src="screenshots/watchlist.gif" alt="Watchlist Preview" width="250" />
   </div>
 </div>
 
@@ -112,18 +106,12 @@ The **Search Screen** allows users to search for movies or TV shows. Features in
 <div style="display: flex; justify-content: center; gap: 20px; text-align: center;">
   <div>
     <p><strong>Advanced filtering</strong></p>
-    <video width="200" autoplay muted loop>
-      <source src="screenshots/search_filters.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <img src="screenshots/seearch_filters.gif" alt="Search Filters Preview" width="200" />
   </div>
 
   <div>
     <p><strong>Searching by title</strong></p>
-    <video width="200" autoplay muted loop>
-      <source src="screenshots/search_title.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <img src="screenshots/seearch_title.gif" alt="Search Title Preview" width="200" />
   </div>
 
   <div>
