@@ -39,19 +39,12 @@ This interactive and visually engaging **swipe card UI** is designed to offer an
 
   <div>
     <p><strong>➡️ Browsing Movies – Using Buttons</strong></p>
-    <video width="200" autoplay muted loop>
-      <source src="https://github.com/user-attachments/assets/7259b15b-3726-4dbe-bfe9-5a5c5d3e7fcd" type="video/mp4" />
-    </video>
-https://github.com/user-attachments/assets/7259b15b-3726-4dbe-bfe9-5a5c5d3e7fcd
-
-
+    ![](screenshots/discover_click.gif)
   </div>
 
   <div>
     <p><strong>👆 Browsing Movies – Swiping Cards</strong></p>
-    <video width="200" autoplay muted loop>
-      <source src="screenshots/discover_swipe.mp4" type="video/mp4" />
-    </video>
+    ![](screenshots/discover_swipe.gif) 
   </div>
 
 </div>
